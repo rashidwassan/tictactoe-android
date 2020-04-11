@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Rush TicTacToe</string>
+    <string name="welcome_to_tic_tac_toe">Welcome To Tic-Tac-Toe</string>
+    <string name="todo">box</string>
+    <string name="Developer">Developed by: Rashid</string>
+    <string name="EnterUsers">Hello!</string>
+    <string name="p1">Player 1</string>
+    <string name="p2">Player 2</string>
+
+    <string name="flatbtnwelcome">flatbtn</string>
+    <string name="flatbtnreset">flatbtnrst</string>
+</resources>
