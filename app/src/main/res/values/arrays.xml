@@ -3,9 +3,7 @@
 
     <string-array name="splash">
         <item>Rush</item>
-        <item>Tic</item>
-        <item>Tac</item>
-        <item>Toe</item>
+        <item>TicTacToe</item>
         <item>RushTicTacToe</item>
     </string-array>
 

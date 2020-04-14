@@ -24,7 +24,7 @@
             android:layout_width="156dp"
             android:layout_height="90dp"
             android:onClick="check"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,6 +44,9 @@
             app:layout_constraintHorizontal_bias="0.707"
             app:layout_constraintStart_toStartOf="@+id/playbtn"
             app:layout_constraintTop_toTopOf="@+id/playbtn" />
+
+
+
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -111,5 +114,32 @@
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+            android:id="@+id/linearLayout5"
+            android:layout_width="130dp"
+            android:layout_height="51dp"
+            android:layout_marginBottom="24dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+                android:id="@+id/fbShareBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:onClick="fbShare"
+                android:background="@drawable/facebook" />
+
+        <Button
+                android:id="@+id/instaShareBtn"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:background="@drawable/instagram"
+                android:onClick="instaShare" />
+    </LinearLayout>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
