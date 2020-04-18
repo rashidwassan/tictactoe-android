@@ -10,8 +10,9 @@
     <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="0dp"
-            android:layout_height="400dp"
-            android:layout_marginTop="40dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginBottom="85dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout4"
             app:layout_constraintEnd_toEndOf="parent"
@@ -21,7 +22,8 @@
         <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="10dp"
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
@@ -147,7 +149,7 @@
             android:id="@+id/linearLayout3"
             android:layout_width="373dp"
             android:layout_height="60dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="24dp"
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -159,9 +161,8 @@
                 android:layout_height="45dp"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/gradientbackcard"
-                android:paddingStart="30dp"
                 android:paddingTop="2dp"
-                android:paddingEnd="20dp"
+                android:textAlignment="center"
                 android:textSize="30sp" />
 
         <ImageView
@@ -176,10 +177,9 @@
 
     <LinearLayout
             android:id="@+id/linearLayout4"
-            android:layout_width="375dp"
-            android:layout_height="98dp"
-            android:layout_marginStart="5dp"
-            android:layout_marginBottom="24dp"
+            android:layout_width="350dp"
+            android:layout_height="100dp"
+            android:layout_marginBottom="8dp"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="@+id/grid"
             app:layout_constraintEnd_toEndOf="parent"
@@ -191,11 +191,12 @@
                 android:layout_height="40dp"
                 android:layout_marginBottom="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/p1stats"
+                android:background="@drawable/gradientbtn2"
                 android:paddingStart="15dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="15dp"
-                android:textColor="#3F51B5"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
 
         <TextView
@@ -203,11 +204,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:layout_weight="1"
-                android:background="@drawable/p2stats"
+                android:background="@drawable/gradientbtn2"
                 android:paddingStart="15dp"
                 android:paddingTop="4dp"
                 android:paddingEnd="15dp"
-                android:textColor="#3F51B5"
+                android:textAlignment="center"
+                android:textColor="@android:color/white"
                 android:textSize="24sp" />
     </LinearLayout>
 

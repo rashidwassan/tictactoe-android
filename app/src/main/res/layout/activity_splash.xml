@@ -7,6 +7,8 @@
         android:background="@drawable/gradientbg"
         tools:context=".SplashActivity">
 
+    <!-- XML comment goes like that -->
+
     <com.tomer.fadingtextview.FadingTextView
             android:id="@+id/fadingtextView"
             android:layout_width="wrap_content"
@@ -24,6 +26,7 @@
             android:id="@+id/splashx"
             android:layout_width="210dp"
             android:layout_height="270dp"
+            android:contentDescription="@string/Developer"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

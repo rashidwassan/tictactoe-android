@@ -9,9 +9,11 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
+        <activity android:name=".loadingScreen"></activity>
+        <activity
+                android:name=".MainActivity"
                 android:configChanges="orientation"
-                android:screenOrientation="portrait"></activity>
+                android:screenOrientation="portrait" />
         <activity
                 android:name=".Lobby"
                 android:screenOrientation="portrait" />

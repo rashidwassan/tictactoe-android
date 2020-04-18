@@ -8,10 +8,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
@@ -24,18 +26,11 @@ import com.tomer.fadingtextview.FadingTextView;
 
 import java.util.concurrent.TimeUnit;
 
-public class Lobby extends AppCompatActivity {
+public class Lobby extends AppCompatActivity implements Runnable
+{
 
-    // TO pass strings to next activity.
-    public static final String player1str = "com.rashidwassan.tictactoe.player1str";
-    public static final String player2str = "com.rashidwassan.tictactoe.player2str";
-
-    // For sound effects...
-    private SoundPool soundPool;
-    // Creating ids for sound files to be used. can be reused.
-    private int lobbybg;
-
-    FadingTextView fadingplaytext;
+    MediaPlayer player;
+    ImageView img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -56,56 +51,39 @@ public class Lobby extends AppCompatActivity {
         }
 
 
-
-        // checking which version of android device is running...
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP)
-        {
-
-            // New way of creating sound pool.
-            AudioAttributes audioAttributes = new AudioAttributes.Builder()
-                    // Usage best for gaming.
-                    .setUsage(AudioAttributes.USAGE_GAME)
-                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                    .build();
-
-            soundPool = new SoundPool.Builder()
-                    .setMaxStreams(3)
-                    .setAudioAttributes(audioAttributes)
-                    .build();
-        }
-        else
-        {
-            // if device has api level less than 21 (Lollipoyp).
-            // Using legacy method for sound pool creation.
-            soundPool = new SoundPool(3, AudioManager.STREAM_MUSIC, 0);
-        }
-
-        // Loading sounds...
-        lobbybg = soundPool.load(this, R.raw.lobbybg, 1);
-
-        soundPool.play(lobbybg,1,1, 1, 0, 1);
-
-
-
         String[] str = {"PLAY!"};
 
-        //for breating play text
-        // For fading text...
-        fadingplaytext = findViewById(R.id.fadingtextplay);
-        fadingplaytext.setTimeout(800, TimeUnit.MILLISECONDS);
-        fadingplaytext.setTexts(str);
-
         // For animating playbtn...
-        ImageView img = (ImageView) findViewById(R.id.playbtn);
-        img.setTranslationX(-700f);
-        img.animate().translationXBy(700f).setDuration(800);
+        img = (ImageView) findViewById(R.id.playbtn);
+        img.setTranslationY(1000f);
 
         // For animating welcome logo...
         ImageView img1 = (ImageView) findViewById(R.id.welcome);
         img1.setTranslationY(-700f);
-        img1.animate().translationYBy(700f).setDuration(3000);
+        img1.animate().translationYBy(700f).setDuration(2000);
+
+        // For background music...
+        if(player == null)
+        {
+
+            player = MediaPlayer.create(this, R.raw.lobbybg);
+
+        }
+        player.start();
+
+        Handler handler = new Handler();
+        handler.postDelayed(this, 2500);
 
     }
+
+    @Override
+    public void run()
+    {
+        // Delay in playbutton animation
+        img.animate().translationYBy(-1000f).setDuration(500);
+
+    }
+
 
     // Creating one time display Dialog...
     private void showStartDialog()
@@ -117,7 +95,7 @@ public class Lobby extends AppCompatActivity {
                         "You may experience some bugs and crashes." +
                         " Please inform us about your experience on Instagram by clicking that Instagram icon." +
                         "\n\nThanks for giving us a try!")
-                .setPositiveButton("ok", new DialogInterface.OnClickListener()
+                .setPositiveButton("Okay", new DialogInterface.OnClickListener()
                 {
                     @Override
                     public void onClick(DialogInterface dialog, int which)
@@ -140,15 +118,15 @@ public class Lobby extends AppCompatActivity {
 
         // Getting values from text fields.
         EditText p1 = findViewById(R.id.player1);
-        String player1 = p1.getText().toString();
+        playerNames.player1name = p1.getText().toString();
 
         EditText p2 = findViewById(R.id.player2);
-        String player2 = p2.getText().toString();
+        playerNames.player2name = p2.getText().toString();
 
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, loadingScreen.class);
 
-        intent.putExtra(player1str, player1);
-        intent.putExtra(player2str, player2);
+      //  intent.putExtra(player1str, player1);
+      //  intent.putExtra(player2str, player2);
 
         startActivity(intent);
 
@@ -170,5 +148,74 @@ public class Lobby extends AppCompatActivity {
 
     }
 
+    // for pausing music when activity is paused.
+    @Override
+    protected void onPause()
+    {
+
+        if(player != null)
+        {
+            player.release();
+            player = null;
+        }
+
+
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume()
+    {
+
+        if(player == null)
+        {
+
+            player = MediaPlayer.create(this, R.raw.lobbybg);
+
+        }
+        player.start();
+
+        super.onResume();
+    }
+
+    // Creating alert dialog when back key is pressed...
+    @Override
+    public void onBackPressed()
+    {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Exit Game")
+                .setMessage("Are you sure you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+
+    }
+
+    @Override
+    protected void onDestroy()
+    {
+
+        if(player != null)
+        {
+            player.release();
+            player = null;
+        }
+        super.onDestroy();
+    }
 
 }

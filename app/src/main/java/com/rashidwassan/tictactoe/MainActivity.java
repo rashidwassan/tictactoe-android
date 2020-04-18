@@ -1,11 +1,14 @@
 package com.rashidwassan.tictactoe;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
@@ -61,6 +64,8 @@ public class MainActivity extends AppCompatActivity
     private int cupshockwave;
     private int tadawinsound;
 
+    MediaPlayer player;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -70,6 +75,15 @@ public class MainActivity extends AppCompatActivity
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON, WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
+        // For background music...
+        if(player == null)
+        {
+
+            player = MediaPlayer.create(this, R.raw.mainbgmusic);
+
+        }
+        player.start();
+
 
         // Giving first turn to random opponent...
          Random random = new Random();
@@ -78,19 +92,16 @@ public class MainActivity extends AppCompatActivity
         if(randomnum == 0)
             {
 
-                // Getting values of usernames from previous activity.
-                Intent intent = getIntent();
-                player1name = intent.getStringExtra(Lobby.player1str);
-                player2name = intent.getStringExtra(Lobby.player2str);
+                player1name = playerNames.player1name;
+                player2name = playerNames.player2name;
 
             }
 
             else
             {
 
-            Intent intent = getIntent();
-            player2name = intent.getStringExtra(Lobby.player1str);
-            player1name = intent.getStringExtra(Lobby.player2str);
+                player2name = playerNames.player1name;
+                player1name = playerNames.player2name;
 
             }
 
@@ -281,14 +292,64 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    // Creating alert dialog when back key is pressed...
+    @Override
+    public void onBackPressed()
+    {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Quit Game!!!")
+                .setMessage("Are you sure you want to quit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which)
+                    {
+                        dialog.dismiss();
+                    }
+                })
+                .create().show();
+
+    }
+
+    @Override
+    protected void onResume()
+    {
+        player.start();
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause()
+    {
+        player.pause();
+        super.onPause();
+    }
 
     @Override
     protected void onDestroy()
     {
-        super.onDestroy();
 
         // cleaning sound pool to freeup memory,
         soundPool.release();
         soundPool = null;
+
+        // releasing media player...
+
+        if(player != null)
+        {
+            player.release();
+            player = null;
+        }
+        super.onDestroy();
+
     }
 }

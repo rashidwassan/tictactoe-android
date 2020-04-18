@@ -9,9 +9,10 @@
 
     <ImageView
             android:id="@+id/welcome"
-            android:layout_width="397dp"
-            android:layout_height="292dp"
-            android:layout_marginTop="25sp"
+            android:layout_width="0dp"
+            android:layout_height="280dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             android:contentDescription="@string/app_name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +22,7 @@
 
     <ImageView
             android:id="@+id/playbtn"
-            android:layout_width="156dp"
+            android:layout_width="90dp"
             android:layout_height="90dp"
             android:onClick="check"
             app:layout_constraintBottom_toTopOf="@+id/linearLayout5"
@@ -29,75 +30,30 @@
             app:layout_constraintHorizontal_bias="0.502"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-            app:srcCompat="@drawable/gradientbtn2" />
-
-    <com.tomer.fadingtextview.FadingTextView
-            android:id="@+id/fadingtextplay"
-            android:layout_width="104dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginBottom="2dp"
-            android:textColor="@android:color/white"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toBottomOf="@+id/playbtn"
-            app:layout_constraintEnd_toEndOf="@+id/playbtn"
-            app:layout_constraintHorizontal_bias="0.707"
-            app:layout_constraintStart_toStartOf="@+id/playbtn"
-            app:layout_constraintTop_toTopOf="@+id/playbtn" />
+            app:srcCompat="@drawable/playbtn" />
 
 
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+            android:orientation="vertical"
             android:id="@+id/constraintLayout"
-            android:layout_width="346dp"
-            android:layout_height="199dp"
-            android:layout_marginTop="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome">
 
         <LinearLayout
-                android:id="@+id/linearLayout2"
-                android:layout_width="314dp"
-                android:layout_height="73dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                    android:id="@+id/player2icon"
-                    android:layout_width="81dp"
-                    android:layout_height="55dp"
-                    android:contentDescription="@string/Developer"
-                    app:srcCompat="@drawable/facelogo2" />
-
-            <EditText
-                    android:id="@+id/player2"
-                    android:layout_width="227dp"
-                    android:layout_height="60dp"
-                    android:ems="10"
-                    android:fontFamily="sans-serif-thin"
-                    android:inputType="textPersonName"
-                    android:text="@string/p2"
-                    android:textColor="#FFFFFF" />
-        </LinearLayout>
-
-        <LinearLayout
                 android:id="@+id/Player1layout"
-                android:layout_width="315dp"
-                android:layout_height="62dp"
-                android:orientation="horizontal"
-                app:layout_constraintBottom_toTopOf="@+id/linearLayout2"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_width="330dp"
+                android:layout_height="70dp"
+                android:orientation="horizontal">
 
             <ImageView
                     android:id="@+id/player1icon"
                     android:layout_width="81dp"
                     android:layout_height="55dp"
+                    android:layout_marginTop="10dp"
                     android:contentDescription="@string/Developer"
                     app:srcCompat="@drawable/usericon1" />
 
@@ -113,7 +69,33 @@
                     android:textSize="18sp" />
 
         </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="330dp"
+                android:layout_height="70dp"
+                android:layout_marginTop="30dp"
+                android:orientation="horizontal">
+
+            <ImageView
+                    android:id="@+id/player2icon"
+                    android:layout_width="81dp"
+                    android:layout_height="55dp"
+                    android:contentDescription="@string/Developer"
+                    app:srcCompat="@drawable/usericon2" />
+
+            <EditText
+                    android:id="@+id/player2"
+                    android:layout_width="230dp"
+                    android:layout_height="60dp"
+                    android:ems="10"
+                    android:fontFamily="sans-serif-thin"
+                    android:inputType="textPersonName"
+                    android:text="@string/p2"
+                    android:textColor="#FFFFFF" />
+        </LinearLayout>
+
+    </LinearLayout>
 
     <LinearLayout
             android:id="@+id/linearLayout5"
