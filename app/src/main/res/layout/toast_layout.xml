@@ -9,9 +9,10 @@
 
         <ImageView
                 android:id="@+id/toast_image"
-                android:layout_width="match_parent"
-                android:layout_height="433dp"
-                android:layout_marginTop="112dp" />
+                android:layout_width="305dp"
+                android:layout_height="310dp"
+                android:layout_marginTop="210dp"
+                android:layout_gravity="center" />
 
         <TextView
                 android:id="@+id/toast_text"
@@ -19,7 +20,7 @@
                 android:layout_height="45dp"
                 android:textColor="@android:color/white"
                 android:textSize="30sp"
-                android:layout_gravity="center"
+                android:layout_gravity="center_horizontal"
 
                 />
 

@@ -6,6 +6,7 @@
     <string name="EnterUsers">Hello!</string>
     <string name="p1">Player 1</string>
     <string name="p2">Player 2</string>
+    <string name="continues">CONTINUE</string>
 
     <string name="flatbtnwelcome">flatbtn</string>
     <string name="flatbtnreset">flatbtnrst</string>

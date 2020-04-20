@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.media.AudioAttributes;
@@ -17,16 +18,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.tomer.fadingtextview.FadingTextView;
+
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class MainActivity extends AppCompatActivity
 {
 
+
     TextView status, plr1sts, plr2sts;
+    String winnerStr;
+
+    Dialog dialog;
 
     // For our custom toast...
     TextView toastText;
@@ -155,6 +164,34 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+    // For custom dialog...
+    void showWinDialog()
+    {
+
+        LayoutInflater inflater = LayoutInflater.from(this);
+        View view = inflater.inflate(R.layout.playerwindialog, null);
+
+        TextView wintext = view.findViewById(R.id.winnerdiagtext);
+        wintext.setText(winnerStr);
+
+        Button continuebtn = view.findViewById(R.id.winscrcontinuebtn);
+        continuebtn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                dialog.dismiss();
+            }
+        });
+
+
+        dialog = new Dialog(this, android.R.style.Theme_DeviceDefault_Light_NoActionBar_Fullscreen);
+        dialog.setContentView(view);
+
+        dialog.show();
+
+    }
+
 
     public void playerTap(View view)
     {
@@ -199,30 +236,21 @@ public class MainActivity extends AppCompatActivity
                     gameState[winPosition[0]]!=2)
            {
                //somebody has won, lets find out!
-               String winnerStr;
                gameActive = false;
 
                if(gameState[winPosition[0]] == 0)
                {
 
-                   toastText.setText(player1name + " is Winner!");
-                   toastImage.setImageResource(R.drawable.winnercup);
-                   toastImage.setTranslationY(-1500f);
-                   toastImage.animate().translationYBy(1500f).setDuration(400);
-                   Toast toast = new Toast(getApplicationContext());
-                   toast.setGravity(Gravity.FILL, 0, 0);
-                   toast.setDuration(Toast.LENGTH_LONG);
-                   toast.setView(layout);
-
                    // For playing sound playerwon. this line should be duplicated for other sounds.
                    soundPool.play(tadawinsound,1,1, 1, 0, 1);
                    soundPool.play(cupshockwave,1,1, 1, 0, 1);
 
-                    // Displaying toast.
-                   toast.show();
+
 
                    winnerStr = player1name + " has Won!";
                    ++p1WinStreak;
+
+                   showWinDialog();
 
                    plr1sts.setText(player1name + ":  " + p1WinStreak + "pts");
 
@@ -231,23 +259,16 @@ public class MainActivity extends AppCompatActivity
                else
                {
 
-                   toastText.setText(player2name + " is Winner!");
-                   toastImage.setImageResource(R.drawable.winnercup);
-                   toastImage.setTranslationY(-1500f);
-                   toastImage.animate().translationYBy(1500f).setDuration(400);
-                   Toast toast = new Toast(getApplicationContext());
-                    toast.setGravity(Gravity.FILL, 0, 0);
-                   toast.setDuration(Toast.LENGTH_LONG);
-                   toast.setView(layout);
-
                    // For playing sound playerwon. this line should be duplicated for other sounds.
                    soundPool.play(tadawinsound,1,1, 1, 0, 1);
                    soundPool.play(cupshockwave,1,1, 1, 0, 1);
 
-                   toast.show();
 
                    winnerStr = player2name + " has Won!";
                    ++p2WinStreak;
+
+                 //  toast.show();
+                   showWinDialog();
 
                    plr2sts.setText(player2name + ":  " + p2WinStreak + "pts");
 

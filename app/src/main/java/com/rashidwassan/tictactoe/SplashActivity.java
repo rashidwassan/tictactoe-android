@@ -37,10 +37,10 @@ public class SplashActivity extends AppCompatActivity implements Runnable
         fadingTextView.setTimeout(500, TimeUnit.MILLISECONDS);
 
 
-        // For animating welcome X logo...
+         //For animating welcome X logo...
         ImageView img1 = (ImageView) findViewById(R.id.splashx);
         img1.setTranslationY(-4000f);
-        img1.animate().translationYBy(4000f).setDuration(800);
+        img1.animate().translationYBy(4000f).setDuration(1800);
 
 
         // For background music...
@@ -54,7 +54,7 @@ public class SplashActivity extends AppCompatActivity implements Runnable
 
 
         Handler handler = new Handler();
-        handler.postDelayed(this, 2500);
+        handler.postDelayed(this, 3000);
 
     }
 

@@ -72,7 +72,7 @@ public class Lobby extends AppCompatActivity implements Runnable
         player.start();
 
         Handler handler = new Handler();
-        handler.postDelayed(this, 2500);
+        handler.postDelayed(this, 1500);
 
     }
 
@@ -80,7 +80,7 @@ public class Lobby extends AppCompatActivity implements Runnable
     public void run()
     {
         // Delay in playbutton animation
-        img.animate().translationYBy(-1000f).setDuration(500);
+        img.animate().translationYBy(-1000f).setDuration(1000);
 
     }
 
@@ -93,7 +93,7 @@ public class Lobby extends AppCompatActivity implements Runnable
                 .setTitle("Welcome to RushTicTacToe")
                 .setMessage("\nThis game is under development!\n\n" +
                         "You may experience some bugs and crashes." +
-                        " Please inform us about your experience on Instagram by clicking that Instagram icon." +
+                        " Please inform us about your experience by clicking that Instagram button." +
                         "\n\nThanks for giving us a try!")
                 .setPositiveButton("Okay", new DialogInterface.OnClickListener()
                 {
